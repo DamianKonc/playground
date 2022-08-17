@@ -6,4 +6,5 @@ test("console log after click", () => {
   render(<ButtonClicker onClick={onClick} />);
   const buttonElement = screen.getByText("Click Me");
   fireEvent.click(buttonElement);
+  expect(onClick).toHaveBeenCalledTimes(1);
 });
