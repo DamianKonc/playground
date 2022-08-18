@@ -1,12 +1,21 @@
 import type { NextPage } from "next";
+import Link from "next/link";
 
 const NavBar: NextPage = () => {
   return (
     <ul>
-      <li>Home</li>
-      <li>Poke Api</li>
-      <li>Nbp Api</li>
-      <li>Contact</li>
+      <li>
+        <Link href="/"> Home</Link>
+      </li>
+      <li>
+        <Link href="/PokeApi">Poke Api</Link>
+      </li>
+      <li>
+        <Link href="/NBPApi">Nbp Api</Link>
+      </li>
+      <li>
+        <Link href="/">Contact</Link>
+      </li>
     </ul>
   );
 };
