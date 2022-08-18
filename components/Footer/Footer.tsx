@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
+import styles from "./Footer.module.scss";
 
 const Footer: NextPage = () => {
-  return <footer>Stopa @ datas cos tam </footer>;
+  return <footer className={styles.footer}>Stopa @ datas cos tam </footer>;
 };
 
 export default Footer;
