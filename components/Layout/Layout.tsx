@@ -1,12 +1,12 @@
 import { NextPage } from "next";
 import React from "react";
-import NavBar from "../Navbar/Navbar";
+import NavbarLayout from "../Navbar/NavbarLayout/NavbarLayout";
 import Footer from "../Footer/Footer";
 
 const Layout: NextPage<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <>
-      <NavBar />
+      <NavbarLayout />
       <div>{children}</div>
       <Footer />
     </>

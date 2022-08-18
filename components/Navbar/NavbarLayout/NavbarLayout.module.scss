@@ -1,0 +1,16 @@
+.navbarLayout {
+  display: flex;
+  gap: 20px;
+  list-style-type: none;
+}
+
+.navbarLayout__el {
+  border: 1px solid black;
+  transition: all 0.1s;
+}
+
+.navbarLayout__el:hover {
+  transform: scale(1.2);
+  background-color: black;
+  color: white;
+}
