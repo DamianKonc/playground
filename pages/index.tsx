@@ -7,7 +7,7 @@ import NavBar from "../components/Navbar/NavbarLayout/NavbarLayout";
 const Home: NextPage = () => {
   return (
     <>
-      <div>Home</div>
+      <div role={"home"}>Home</div>
     </>
   );
 };
