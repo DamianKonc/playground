@@ -1,0 +1,15 @@
+.pokeApi__list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 50px;
+}
+
+.pokeApi__list_el {
+  background-color: rgb(89, 89, 89);
+  color: white;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
