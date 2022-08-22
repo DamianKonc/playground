@@ -46,7 +46,7 @@ const PokeApi: NextPage = () => {
   };
 
   const PickCurrentPokemon = () => {
-    const pokemonApi = "https://pokeapi.co/api/v2/pokemon/";
+    const pokemonApi = "https://pokeapi.co/api/v2/pokemon?limit=151";
     const pokemon = `https://pokeapi.co/api/v2/pokemon/${curretPokemonName}`;
 
     const getPokemonApi = fetch(pokemonApi);
@@ -54,13 +54,28 @@ const PokeApi: NextPage = () => {
 
     Promise.all([getPokemonApi, getPokemon])
       .then((results) => Promise.all(results.map((r) => r.json())))
-      .then((results) => console.log(results[1]));
+      .then((results) => {
+        const arrResults = results[0].results;
+        const filterArray = arrResults.filter(
+          (el) => el.name === curretPokemonName
+        );
+        fetch(filterArray[0].url)
+          .then((res) => res.json())
+          .then((data) => {
+            setPokemonData(data);
+          });
+        // console.log(pokemonData);
+      });
   };
 
   useEffect(() => {
     setPokemonData([]);
     getData(pokemonApiLink);
   }, [pokemonApiLink]);
+
+  useEffect(() => {
+    console.log(pokemonData.sprites);
+  }, [pokemonData]);
   // ........
   return (
     <div>
@@ -71,12 +86,22 @@ const PokeApi: NextPage = () => {
         <button onClick={PickCurrentPokemon}>Choose this pokemon</button>
       </label>
       <ul className={styles.pokeApi__list}>
-        {pokemonData.map((el) => (
-          <li className={styles.pokeApi__list_el} key={el.id}>
-            <h3>{el.name}</h3>
-            <img alt={el.name} src={el.sprites.front_default} />
+        {pokemonData.length > 1 ? (
+          pokemonData.map((el) => (
+            <li className={styles.pokeApi__list_el} key={el.id}>
+              <h3>{el.name}</h3>
+              <img alt={el.name} src={el.sprites.front_default} />
+            </li>
+          ))
+        ) : (
+          <li className={styles.pokeApi__list_el} key={pokemonData.id}>
+            <h3>{pokemonData.name}</h3>
+            <img
+              alt={pokemonData.name}
+              // src={pokemonData.sprites.front_default}
+            />
           </li>
-        ))}
+        )}
       </ul>
     </div>
   );
