@@ -8,6 +8,7 @@ const PokeApi: NextPage = () => {
   const [pokemonApiLink, setPokemonApiLink] = useState(
     "https://pokeapi.co/api/v2/pokemon/"
   );
+  const [curretPokemonName, setCurrentPokemonName] = useState("");
 
   const getData = async (pokeLink) => {
     const fetchPromise = fetch(pokeLink);
@@ -32,7 +33,6 @@ const PokeApi: NextPage = () => {
                 return response.json();
               })
               .then((data) => {
-                console.log(data);
                 setPokemonData((prev) => [...prev, data]);
               })
           );
@@ -40,7 +40,22 @@ const PokeApi: NextPage = () => {
         addItems(resp);
       });
   };
-  console.log(pokemonData);
+
+  const handlePokemonName = (e) => {
+    setCurrentPokemonName(e.currentTarget.value);
+  };
+
+  const PickCurrentPokemon = () => {
+    const pokemonApi = "https://pokeapi.co/api/v2/pokemon/";
+    const pokemon = `https://pokeapi.co/api/v2/pokemon/${curretPokemonName}`;
+
+    const getPokemonApi = fetch(pokemonApi);
+    const getPokemon = fetch(pokemon);
+
+    Promise.all([getPokemonApi, getPokemon])
+      .then((results) => Promise.all(results.map((r) => r.json())))
+      .then((results) => console.log(results[1]));
+  };
 
   useEffect(() => {
     setPokemonData([]);
@@ -50,6 +65,11 @@ const PokeApi: NextPage = () => {
   return (
     <div>
       <h1>Welcome in PokeApi</h1>
+      <label>
+        Pick Pokemon
+        <input value={curretPokemonName} onChange={handlePokemonName} />
+        <button onClick={PickCurrentPokemon}>Choose this pokemon</button>
+      </label>
       <ul className={styles.pokeApi__list}>
         {pokemonData.map((el) => (
           <li className={styles.pokeApi__list_el} key={el.id}>
