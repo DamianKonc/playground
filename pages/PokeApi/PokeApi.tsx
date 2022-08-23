@@ -21,41 +21,52 @@ const PokeApi: NextPage = () => {
         data.results.map((el) => setSinglePokeUrl((prev) => [...prev, el.url]))
       );
   };
+  //..s
+
   //..
-  const getPokemonDatas = () => {
-    setLoading(true);
-    setPokemonDatas([]);
-    const fetchingData = () =>
-      singlePokeUrl.map((el) =>
-        fetch(el)
-          .then((item) => item.json())
-          .then((data) => {
-            setPokemonDatas((prev) => [...prev, data]);
-            setLoading(false);
-          })
-      );
-
-    setTimeout(fetchingData, 200);
-  };
-
   useEffect(() => {
     setFirstPokeUrl();
-    getUrls();
   }, []);
 
   useEffect(() => {
-    getPokemonDatas();
+    getUrls();
   }, [pokeUrl]);
-  //.
+
+  useEffect(() => {
+    setPokemonDatas([]);
+    let isCancelled = false;
+    singlePokeUrl.map((el) =>
+      fetch(el)
+        .then((item) => item.json())
+        .then((data) => {
+          if (!isCancelled) {
+            setPokemonDatas((prev) => [...prev, data]);
+            setLoading(false);
+          }
+        })
+    );
+    return () => {
+      isCancelled = true;
+    };
+  }, [singlePokeUrl]);
+
+  console.log(singlePokeUrl);
+  console.log(pokemonDatas);
+
   return (
     <section>
-      <ul>
+      <ul className={styles.pokeApi__list}>
         {loading ? (
           <div>LOADING</div>
         ) : (
           pokemonDatas.map((el) => (
-            <li key={el.id}>
-              {el.name} <img src={el.sprites.front_default} alt={el.name} />
+            <li className={styles.pokeApi__list_el} key={el.id}>
+              {el.name}{" "}
+              <img
+                className={styles.pokeApi__list_el_img}
+                src={el.sprites.front_default}
+                alt={el.name}
+              />
             </li>
           ))
         )}
