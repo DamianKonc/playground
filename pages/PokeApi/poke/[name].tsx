@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const Details = () => {
   const [pokemonDatas, setPokemonDatas] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   console.log(pokemonDatas);
 
@@ -15,6 +15,7 @@ const Details = () => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${fetchingName}`)
       .then((data) => data.json())
       .then((el) => {
+        setLoading(false);
         return setPokemonDatas(el);
       });
   }, []);
@@ -27,8 +28,8 @@ const Details = () => {
           <h1>{pokemonDatas.name}</h1>
           <Image
             unoptimized={true}
-            loader={() => pokemonDatas.sprites.front_default}
             alt={pokemonDatas.name}
+            loader={() => pokemonDatas.sprites.front_default}
             src={pokemonDatas.sprites.front_default}
             width={130}
             height={150}

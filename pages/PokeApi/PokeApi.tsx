@@ -10,7 +10,7 @@ const PokeApi: NextPage = () => {
   const [pokeUrl, setPokeUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
   const [singlePokeUrl, setSinglePokeUrl] = useState<string[]>([]);
   const [pokemonDatas, setPokemonDatas] = useState<{}[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
 
