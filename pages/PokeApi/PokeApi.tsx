@@ -11,6 +11,8 @@ const PokeApi: NextPage = () => {
   const [singlePokeUrl, setSinglePokeUrl] = useState<string[]>([]);
   const [pokemonDatas, setPokemonDatas] = useState<{}[]>([]);
   const [loading, setLoading] = useState(true);
+  const [nextPage, setNextPage] = useState();
+  const [prevPage, setPrevPage] = useState();
 
   const router = useRouter();
 
@@ -22,9 +24,11 @@ const PokeApi: NextPage = () => {
     setSinglePokeUrl([]);
     fetch(pokeUrl)
       .then((data) => data.json())
-      .then((data) =>
-        data.results.map((el) => setSinglePokeUrl((prev) => [...prev, el.url]))
-      );
+      .then((data) => {
+        setNextPage(data.next);
+        setPrevPage(data.previous);
+        data.results.map((el) => setSinglePokeUrl((prev) => [...prev, el.url]));
+      });
   };
 
   useEffect(() => {
@@ -53,6 +57,14 @@ const PokeApi: NextPage = () => {
     };
   }, [singlePokeUrl]);
 
+  const goToNext = () => {
+    setPokeUrl(nextPage);
+  };
+
+  const goToBack = () => {
+    setPokeUrl(prevPage);
+  };
+
   return (
     <section>
       <ul className={styles.pokeApi__list}>
@@ -80,6 +92,18 @@ const PokeApi: NextPage = () => {
           ))
         )}
       </ul>
+      <div className={styles.pokeApi__list_el_btns_wrapper}>
+        {prevPage && (
+          <button className={styles.pokeApi__list_el_btn} onClick={goToBack}>
+            Prev
+          </button>
+        )}
+        {nextPage && (
+          <button className={styles.pokeApi__list_el_btn} onClick={goToNext}>
+            Next
+          </button>
+        )}
+      </div>
     </section>
   );
 };

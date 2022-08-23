@@ -20,5 +20,13 @@
   font-size: 1.2rem;
   border: 1px solid white;
   padding: 5px 20px;
-  margin-bottom: 2rem;
+}
+
+.pokeApi__list_el_btns_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  background-color: rgb(29, 29, 29);
+  padding: 20px;
 }
