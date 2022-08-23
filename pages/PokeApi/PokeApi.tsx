@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 import styles from "./PokeApi.module.scss";
 
@@ -62,7 +63,8 @@ const PokeApi: NextPage = () => {
           pokemonDatas.map((el) => (
             <li className={styles.pokeApi__list_el} key={el.id}>
               {el.name}{" "}
-              <img
+              <Image
+                layout="fill"
                 className={styles.pokeApi__list_el_img}
                 src={el.sprites.front_default}
                 alt={el.name}
