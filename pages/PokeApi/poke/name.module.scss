@@ -1,0 +1,23 @@
+.singlePokeWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(72, 72, 72);
+  color: white;
+  padding: 30px;
+}
+
+.singlePoke__name {
+}
+
+.singlePoke__pic {
+}
+
+.singlePoke__abilities {
+  text-align: center;
+  font-size: 1.4rem;
+}
+.singlePoke__abilities_el {
+  padding: 10px 20px;
+}
