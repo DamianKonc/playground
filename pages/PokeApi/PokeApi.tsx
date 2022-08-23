@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import styles from "./PokeApi.module.scss";
 
@@ -10,6 +11,8 @@ const PokeApi: NextPage = () => {
   const [singlePokeUrl, setSinglePokeUrl] = useState<string[]>([]);
   const [pokemonDatas, setPokemonDatas] = useState<{}[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const setFirstPokeUrl = () => {
     setPokeUrl("https://pokeapi.co/api/v2/pokemon/");
@@ -23,9 +26,7 @@ const PokeApi: NextPage = () => {
         data.results.map((el) => setSinglePokeUrl((prev) => [...prev, el.url]))
       );
   };
-  //..s
 
-  //..
   useEffect(() => {
     setFirstPokeUrl();
   }, []);
@@ -70,11 +71,11 @@ const PokeApi: NextPage = () => {
                 width={130}
                 height={150}
               />
-              <Link href={`/PokeApi/poke/${el.name}`}>
-                <a className={styles.pokeApi__list_el_btn}>
+              <button onClick={() => router.push(`poke/${el.name}`)}>
+                <div className={styles.pokeApi__list_el_btn}>
                   Check this Pokemon
-                </a>
-              </Link>
+                </div>
+              </button>
             </li>
           ))
         )}
