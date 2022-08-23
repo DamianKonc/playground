@@ -8,16 +8,23 @@
   padding: 30px;
 }
 
-.singlePoke__name {
-}
-
-.singlePoke__pic {
-}
-
-.singlePoke__abilities {
+.singlePoke__fonts {
   text-align: center;
   font-size: 1.4rem;
 }
 .singlePoke__abilities_el {
   padding: 10px 20px;
+}
+
+.singlePoke__stats_el {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 30vw;
+}
+@media (max-width: 650px) {
+  .singlePoke__stats_el {
+    flex-direction: column;
+    padding: 10px 15px;
+  }
 }

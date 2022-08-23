@@ -19,6 +19,8 @@ const Details = () => {
       });
   }, []);
 
+  console.log(pokemonDatas);
+
   return (
     <div className={styles.singlePokeWrapper}>
       {loading ? (
@@ -35,7 +37,7 @@ const Details = () => {
             width={130}
             height={150}
           />
-          <div className={styles.singlePoke__abilities}>
+          <div className={styles.singlePoke__fonts}>
             <h3>Abilities:</h3>
             {pokemonDatas.abilities.map((el) => (
               <span
@@ -46,13 +48,15 @@ const Details = () => {
               </span>
             ))}
           </div>
-          <div>
+
+          <div className={styles.singlePoke__fonts}>
             <h3>Base stats:</h3>
-            {pokemonDatas.stats.map((el) => {
-              <div key={el.stat.name}>
-                <span>{el.base_stat}</span> <span> {el.stat.name}</span>
-              </div>;
-            })}
+            {pokemonDatas.stats.map((el) => (
+              <div className={styles.singlePoke__stats_el} key={el.stat.name}>
+                <span>{el.stat.name}</span>
+                <span>{el.base_stat}</span>
+              </div>
+            ))}
           </div>
         </>
       )}
