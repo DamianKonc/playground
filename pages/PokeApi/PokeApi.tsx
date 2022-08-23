@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import styles from "./PokeApi.module.scss";
 
@@ -51,9 +52,6 @@ const PokeApi: NextPage = () => {
     };
   }, [singlePokeUrl]);
 
-  console.log(singlePokeUrl);
-  console.log(pokemonDatas);
-
   return (
     <section>
       <ul className={styles.pokeApi__list}>
@@ -62,13 +60,21 @@ const PokeApi: NextPage = () => {
         ) : (
           pokemonDatas.map((el) => (
             <li className={styles.pokeApi__list_el} key={el.id}>
-              {el.name}{" "}
+              <h3>{el.name}</h3>
+
               <Image
-                layout="fill"
-                className={styles.pokeApi__list_el_img}
-                src={el.sprites.front_default}
+                unoptimized={true}
                 alt={el.name}
+                loader={() => el.sprites.front_default}
+                src={el.sprites.front_default}
+                width={130}
+                height={150}
               />
+              <Link href={`/PokeApi/poke/${el.name}`}>
+                <a className={styles.pokeApi__list_el_btn}>
+                  Check this Pokemon
+                </a>
+              </Link>
             </li>
           ))
         )}
