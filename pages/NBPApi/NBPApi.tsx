@@ -1,29 +1,36 @@
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { MouseEventHandler, SyntheticEvent, useEffect, useState } from "react";
+import styles from "./nbpapi.module.scss";
+
+import GoldPage from "../../components/NBPapiPages/goldPage/GoldPage";
+import CurrancyPage from "../../components/NBPapiPages/currencyPage/CurrancyPage";
 
 const NBPApi: NextPage = () => {
   const [fetchingFrom, setFetchingFrom] = useState<string>();
   const [datas, setDatas] = useState();
-  useEffect(() => {
-    fetch("http://api.nbp.pl/api/exchangerates/rates/C/978/")
-      .then((data) => data.json())
-      .then((json) => console.log(json));
-  }, []);
 
-  const setWhatYouWant = (e) => {
-    console.log(e.target.value);
-    setFetchingFrom(e.target.value);
+  const setWhatYouWant = (e: SyntheticEvent<HTMLButtonElement>) => {
+    console.log(e.currentTarget.value);
+    setFetchingFrom(e.currentTarget.value);
   };
 
   const expr = "Currency";
   return (
-    <section>
+    <section className={styles.nbpapi}>
       {!fetchingFrom && <div>Wybierz co Cię interesuje</div>}
-      <div>
-        <button value={"Gold"} onClick={setWhatYouWant}>
+      <div className={styles.nbpapi__btnWrapper}>
+        <button
+          className={styles.nbpapi__btnWrapper_el}
+          value={"Gold"}
+          onClick={setWhatYouWant}
+        >
           Złoto
         </button>
-        <button value={"Currency"} onClick={setWhatYouWant}>
+        <button
+          className={styles.nbpapi__btnWrapper_el}
+          value={"Currency"}
+          onClick={setWhatYouWant}
+        >
           Waluty
         </button>
       </div>
@@ -31,9 +38,9 @@ const NBPApi: NextPage = () => {
       {(() => {
         switch (fetchingFrom) {
           case "Gold":
-            return <div>Gold</div>;
+            return <GoldPage />;
           case "Currency":
-            return <div>Currency</div>;
+            return <CurrancyPage />;
           default:
             return null;
         }
