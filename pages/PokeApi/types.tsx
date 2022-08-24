@@ -1,5 +1,12 @@
 export type PokemonLink = string;
 
+export interface PokeNameUrl {
+  name: string;
+  url: string;
+}
+
+export type StringOrNull = string | null;
+
 export interface AbilityInterface {
   ability: { name: string; url: string };
   is_hidden: Boolean;

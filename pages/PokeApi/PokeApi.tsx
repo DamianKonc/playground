@@ -4,7 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { PokemonLink, SinglePokemonData } from "./types";
+import {
+  PokemonLink,
+  SinglePokemonData,
+  PokeNameUrl,
+  StringOrNull,
+} from "./types";
 
 import styles from "./PokeApi.module.scss";
 
@@ -15,8 +20,8 @@ const PokeApi: NextPage = () => {
   const [singlePokeUrl, setSinglePokeUrl] = useState<PokemonLink[]>([]);
   const [pokemonDatas, setPokemonDatas] = useState<SinglePokemonData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [nextPage, setNextPage] = useState<string | null>();
-  const [prevPage, setPrevPage] = useState<string | null>();
+  const [nextPage, setNextPage] = useState<StringOrNull>();
+  const [prevPage, setPrevPage] = useState<StringOrNull>();
 
   const router = useRouter();
 
@@ -29,10 +34,9 @@ const PokeApi: NextPage = () => {
     fetch(pokeUrl)
       .then((data) => data.json())
       .then((data) => {
-        console.log(data);
         setNextPage(data.next);
         setPrevPage(data.previous);
-        data.results.map((el: { name: string; url: string }) =>
+        data.results.map((el: PokeNameUrl) =>
           setSinglePokeUrl((prev) => [...prev, el.url])
         );
       });
