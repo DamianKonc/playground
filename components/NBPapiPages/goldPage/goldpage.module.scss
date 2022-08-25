@@ -4,6 +4,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   padding: 20px 30px;
   margin-top: 30px;
 }
@@ -15,4 +16,9 @@
   gap: 20px;
   border: 1px solid gold;
   padding: 10px 20px;
+}
+
+.goldPage__currentPrice_goldChart {
+  font-size: 2rem;
+  background-color: white;
 }

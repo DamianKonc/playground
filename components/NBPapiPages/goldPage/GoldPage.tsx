@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./goldpage.module.scss";
+import LineChart from "../../LineChart/LineChart";
 
 const GoldPage = () => {
   const [goldStats, setGoldStats] = useState();
@@ -39,7 +40,10 @@ const GoldPage = () => {
             <h3>Current Price:</h3>
             <div>{goldStats[0].cena}zł/g</div>
           </div>
-          <div></div>
+          <div className={styles.goldPage__currentPrice_goldChart}>
+            <div>One year gold chart</div>
+            <LineChart />
+          </div>
         </>
       )}
     </section>
