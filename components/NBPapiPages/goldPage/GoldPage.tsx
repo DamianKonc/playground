@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import styles from "./goldpage.module.scss";
 import LineChart from "../../LineChart/LineChart";
+import { setLabels } from "react-chartjs-2/dist/utils";
 
 const GoldPage = () => {
   const [goldStats, setGoldStats] = useState();
-  const [goldDatas, setGoldDatas] = useState();
+  const [goldDatas, setGoldDatas] = useState<string[]>([]);
+  const [goldLabels, setGoldLabels] = useState<Date[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,11 +20,13 @@ const GoldPage = () => {
     fetch(`http://api.nbp.pl/api/cenyzlota/${oneYearFromNow}/${currentData}/`)
       .then((data) => data.json())
       .then((json) => {
-        console.log(json);
-        setGoldDatas(json);
+        json.map((el) => setGoldLabels((prev) => [...prev, el.cena]));
+        json.map((el) => setGoldDatas((prev) => [...prev, el.data]));
       });
+    console.log(goldLabels);
+    console.log(goldDatas);
 
-    fetch("http://api.nbp.pl/api/cenyzlota/today/")
+    fetch("http://api.nbp.pl/api/cenyzlota")
       .then((data) => data.json())
       .then((json) => {
         setLoading(false);
@@ -42,7 +46,7 @@ const GoldPage = () => {
           </div>
           <div className={styles.goldPage__currentPrice_goldChart}>
             <div>One year gold chart</div>
-            <LineChart />
+            <LineChart labelsData={goldDatas} propsData={goldLabels} />
           </div>
         </>
       )}

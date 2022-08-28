@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,7 +11,15 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
-const LineChart = () => {
+type Props = {
+  labelsData: string[];
+  propsData: Date[];
+};
+
+const LineChart = ({ labelsData, propsData }: Props) => {
+  const [charlabel, setcharlabel] = useState(labelsData);
+  const [chartdata, setchartdata] = useState(propsData);
+
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -21,6 +29,9 @@ const LineChart = () => {
     Tooltip,
     Legend
   );
+
+  console.log(labelsData);
+  console.log(propsData);
 
   const options = {
     responsive: true,
@@ -56,23 +67,12 @@ const LineChart = () => {
     },
   };
 
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
-  const datas = ["200", "400", "700", "1110", "1260", "1160", "1200"];
-
   const data = {
-    labels,
+    charlabel,
     datasets: [
       {
         label: "Dataset 1",
-        data: datas,
+        data: chartdata,
         borderColor: "gold",
         backgroundColor: "gold",
       },
