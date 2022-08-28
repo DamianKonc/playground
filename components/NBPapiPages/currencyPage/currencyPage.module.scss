@@ -1,0 +1,38 @@
+.currencyPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.currencyPage__dataWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.currencyPage__dataWrapper_datas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.currencyPage__dataWrapper_datas_el {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  min-width: fit-content;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  padding: 20px 30px;
+  font-size: 1.2rem;
+  color: gold;
+  background-color: rgb(70, 70, 70);
+}
+
+.currencyPage__dataWrapper_datas_el_fat {
+  font-weight: bold;
+}
