@@ -60,15 +60,11 @@ const LineChart = ({ labelsData, propsData }: Props) => {
           },
         },
       },
-      title: {
-        display: true,
-        text: "Chart.js Line Chart",
-      },
     },
   };
 
   const data = {
-    charlabel,
+    labels: labelsData,
     datasets: [
       {
         label: "Dataset 1",
